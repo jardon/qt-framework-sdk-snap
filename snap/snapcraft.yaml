@@ -1,13 +1,13 @@
 name: qt-framework-sdk
 base: core22
-version: 6.5.2
+version: bundle
 summary: Qt Framework SDK
 description: |
   Qt is a cross-platform application development framework widely used
   for developing software with graphical user interfaces (GUIs) and
   interactive functionality.
 
-grade: devel
+grade: stable
 confinement: strict
 
 parts:
@@ -54,6 +54,7 @@ parts:
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
     source-tag: v6.5.2
+    cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
@@ -62,6 +63,115 @@ parts:
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
     source-tag: v6.4.3
+    source-submodules:
+      - qt3d
+      - qt5compat
+      - qt6-build
+      - qtactiveqt
+      - qtbase
+      - qtcanvas3d
+      - qtcharts
+      - qtcoap
+      - qtconnectivity
+      - qtdatavis3d
+      - qtdeclarative
+      - qtdoc
+      - qtfeedback
+      - qtgamepad
+      - qthttpserver
+      - qtimageformats
+      - qtlanguageserver
+      # - qtlocation
+      - qtlottie
+      - qtmqtt
+      - qtmultimedia
+      - qtnetworkauth
+      - qtopcua
+      - qtpim
+      - qtpositioning
+      - qtqa
+      - qtquick3d
+      - qtquick3dphysics
+      - qtquicktimeline
+      - qtremoteobjects
+      - qtrepotools
+      - qtscxml
+      - qtsensors
+      - qtserialbus
+      - qtserialport
+      - qtshadertools
+      - qtspeech
+      - qtsvg
+      - qtsystems
+      - qttools
+      - qttranslations
+      - qtvirtualkeyboard
+      - qtwayland
+      - qtwebchannel
+      - qtwebengine
+      - qtwebglplugin
+      - qtwebsockets
+      - qtwebview
+      - qtxmlpatterns
+    cmake-generator: Ninja
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
+  qt6-2:
+    after: [build-deps, mesa]
+    plugin: cmake
+    source: https://code.qt.io/qt/qt5.git
+    source-tag: v6.2.4
+    source-submodules:
+      - qt3d
+      - qt5compat
+      - qt6-build
+      - qtactiveqt
+      - qtbase
+      - qtcanvas3d
+      - qtcharts
+      - qtcoap
+      - qtconnectivity
+      - qtdatavis3d
+      - qtdeclarative
+      - qtdoc
+      - qtfeedback
+      - qtgamepad
+      - qthttpserver
+      - qtimageformats
+      - qtlanguageserver
+      # - qtlocation
+      - qtlottie
+      - qtmqtt
+      - qtmultimedia
+      - qtnetworkauth
+      - qtopcua
+      - qtpim
+      - qtpositioning
+      - qtqa
+      - qtquick3d
+      - qtquick3dphysics
+      - qtquicktimeline
+      - qtremoteobjects
+      - qtrepotools
+      - qtscxml
+      - qtsensors
+      - qtserialbus
+      - qtserialport
+      - qtshadertools
+      - qtspeech
+      - qtsvg
+      - qtsystems
+      - qttools
+      - qttranslations
+      - qtvirtualkeyboard
+      - qtwayland
+      - qtwebchannel
+      - qtwebengine
+      - qtwebglplugin
+      - qtwebsockets
+      - qtwebview
+      - qtxmlpatterns
     cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
