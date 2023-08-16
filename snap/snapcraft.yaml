@@ -49,6 +49,9 @@ parts:
       - libmd4c-dev
       - libmd4c-html0-dev
       - llvm-dev
+      # 5.15
+      - perl
+      - qt5-qmake
   qt6-5:
     after: [build-deps, mesa]
     plugin: cmake
@@ -176,3 +179,17 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
+  qt5-15:
+    after: [build-deps, mesa]
+    plugin: nil
+    source: https://code.qt.io/qt/qt5.git
+    source-tag: v5.15.9-lts-lgpl
+    source-submodules: []
+    override-pull: |
+      craftctl default
+      perl init-repository
+    override-build: |
+      cd $CRAFT_PART_BUILD
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/opt/$CRAFT_PART_NAME
+      gmake
+      gmake install
