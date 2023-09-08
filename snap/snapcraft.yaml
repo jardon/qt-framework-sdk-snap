@@ -1,6 +1,6 @@
 name: qt-framework-sdk
 base: core22
-version: bundle
+version: 6.5.2
 summary: Qt Framework SDK
 description: |
   Qt is a cross-platform application development framework widely used
@@ -84,14 +84,6 @@ parts:
       - libxcomposite-dev
       - libxcursor-dev
       - libxtst-dev
-      # 6.4
-      - clang
-      - libmd4c-dev
-      - libmd4c-html0-dev
-      - llvm-dev
-      # 5.15
-      - perl
-      - qt5-qmake
     stage-packages:
       - libfontconfig1
       - libfreetype6
@@ -115,144 +107,13 @@ parts:
       - libxcb-xinerama0
       - libxkbcommon0
       - libxkbcommon-x11-0
-  qt6-5:
+  qt-framework:
     after: [build-deps, mesa]
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
-    source-tag: v6.5.2
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
     cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
-  qt6-4:
-    after: [build-deps, mesa]
-    plugin: cmake
-    source: https://code.qt.io/qt/qt5.git
-    source-tag: v6.4.3
-    source-submodules:
-      - qt3d
-      - qt5compat
-      - qt6-build
-      - qtactiveqt
-      - qtbase
-      - qtcanvas3d
-      - qtcharts
-      - qtcoap
-      - qtconnectivity
-      - qtdatavis3d
-      - qtdeclarative
-      - qtdoc
-      - qtfeedback
-      - qtgamepad
-      - qthttpserver
-      - qtimageformats
-      - qtlanguageserver
-      # - qtlocation
-      - qtlottie
-      - qtmqtt
-      - qtmultimedia
-      - qtnetworkauth
-      - qtopcua
-      - qtpim
-      - qtpositioning
-      - qtqa
-      - qtquick3d
-      - qtquick3dphysics
-      - qtquicktimeline
-      - qtremoteobjects
-      - qtrepotools
-      - qtscxml
-      - qtsensors
-      - qtserialbus
-      - qtserialport
-      - qtshadertools
-      - qtspeech
-      - qtsvg
-      - qtsystems
-      - qttools
-      - qttranslations
-      - qtvirtualkeyboard
-      - qtwayland
-      - qtwebchannel
-      - qtwebengine
-      - qtwebglplugin
-      - qtwebsockets
-      - qtwebview
-      - qtxmlpatterns
-    cmake-generator: Ninja
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
-  qt6-2:
-    after: [build-deps, mesa]
-    plugin: cmake
-    source: https://code.qt.io/qt/qt5.git
-    source-tag: v6.2.4
-    source-submodules:
-      - qt3d
-      - qt5compat
-      - qt6-build
-      - qtactiveqt
-      - qtbase
-      - qtcanvas3d
-      - qtcharts
-      - qtcoap
-      - qtconnectivity
-      - qtdatavis3d
-      - qtdeclarative
-      - qtdoc
-      - qtfeedback
-      - qtgamepad
-      - qthttpserver
-      - qtimageformats
-      - qtlanguageserver
-      # - qtlocation
-      - qtlottie
-      - qtmqtt
-      - qtmultimedia
-      - qtnetworkauth
-      - qtopcua
-      - qtpim
-      - qtpositioning
-      - qtqa
-      - qtquick3d
-      - qtquick3dphysics
-      - qtquicktimeline
-      - qtremoteobjects
-      - qtrepotools
-      - qtscxml
-      - qtsensors
-      - qtserialbus
-      - qtserialport
-      - qtshadertools
-      - qtspeech
-      - qtsvg
-      - qtsystems
-      - qttools
-      - qttranslations
-      - qtvirtualkeyboard
-      - qtwayland
-      - qtwebchannel
-      - qtwebengine
-      - qtwebglplugin
-      - qtwebsockets
-      - qtwebview
-      - qtxmlpatterns
-    cmake-generator: Ninja
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/opt/$CRAFT_PART_NAME
-  qt5-15:
-    after: [build-deps, mesa]
-    plugin: nil
-    source: https://code.qt.io/qt/qt5.git
-    source-tag: v5.15.9-lts-lgpl
-    source-submodules: []
-    override-pull: |
-      craftctl default
-      perl init-repository
-    override-build: |
-      cd $CRAFT_PART_BUILD
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/opt/$CRAFT_PART_NAME
-      gmake
-      gmake install
+      - -DCMAKE_INSTALL_PREFIX=/usr
+  
