@@ -71,19 +71,19 @@ parts:
       - libwayland-server0
       - libgles2-mesa-dev
       - libxkbcommon-dev
-      - gperf
-      - clang
-      - bison
-      - flex
-      - nodejs
-      - python2-minimal
-      - python-pip
-      - libnss3-dev
-      - libdbus-1-dev
-      - libdrm-dev
-      - libxcomposite-dev
-      - libxcursor-dev
-      - libxtst-dev
+        #- gperf
+        #- clang
+        #- bison
+        #- flex
+        #- nodejs
+        #- python2-minimal
+        #- python-pip
+        #- libnss3-dev
+        #- libdbus-1-dev
+        #- libdrm-dev
+        #- libxcomposite-dev
+        #- libxcursor-dev
+        #- libxtst-dev
       # 5.15
       - perl
       - qt5-qmake
