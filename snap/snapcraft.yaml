@@ -107,7 +107,7 @@ parts:
       - libxcb-xinerama0
       - libxkbcommon0
       - libxkbcommon-x11-0
-  qt-framework:
+  qt6:
     after: [build-deps, mesa]
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
@@ -115,5 +115,13 @@ parts:
     cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
-  
+    organize:
+      bin: usr/lib/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME/bin
+      lib: usr/lib/$CRAFT_ARCH_TRIPLET/lib
+      include: usr/include/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME
+      plugins: usr/lib/$CRAFT_ARCH_TRIPLET/CRAFT_PART_NAME/plugins
+      qml: usr/lib/$CRAFT_ARCH_TRIPLET/CRAFT_PART_NAME/qml
+      share: usr/share/$CRAFT_PART_NAME/translations
+      phrasebooks: usr/share/$CRAFT_PART_NAME/phrasebooks
+      mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME/mkspecs
+      doc: usr/share/$CRAFT_PART_NAME/doc
