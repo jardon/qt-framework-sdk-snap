@@ -110,7 +110,7 @@ parts:
       - libxcb-xinerama0
       - libxkbcommon0
       - libxkbcommon-x11-0
-  qt5-15:
+  qt5:
     after: [build-deps, mesa]
     plugin: nil
     source: https://code.qt.io/qt/qt5.git
@@ -121,6 +121,16 @@ parts:
       perl init-repository
     override-build: |
       cd $CRAFT_PART_BUILD
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/opt/$CRAFT_PART_NAME
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license #-prefix $CRAFT_PART_INSTALL/opt/$CRAFT_PART_NAME
       gmake
       gmake install
+    organize:
+      bin: usr/lib/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME/bin
+      lib: usr/lib/$CRAFT_ARCH_TRIPLET/lib
+      include: usr/include/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME
+      plugins: usr/lib/$CRAFT_ARCH_TRIPLET/CRAFT_PART_NAME/plugins
+      qml: usr/lib/$CRAFT_ARCH_TRIPLET/CRAFT_PART_NAME/qml
+      share: usr/share/$CRAFT_PART_NAME/translations
+      phrasebooks: usr/share/$CRAFT_PART_NAME/phrasebooks
+      mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/$CRAFT_PART_NAME/mkspecs
+      doc: usr/share/$CRAFT_PART_NAME/doc
