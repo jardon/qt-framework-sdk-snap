@@ -130,7 +130,7 @@ parts:
       include: usr/include/$CRAFT_ARCH_TRIPLET/qt5
       plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins
       qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/qml
-      share: usr/share/qt5/translations
+      translations: usr/share/qt5/translations
       phrasebooks: usr/share/qt5/phrasebooks
       mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/mkspecs
       doc: usr/share/qt5/doc
