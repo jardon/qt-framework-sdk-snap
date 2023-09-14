@@ -121,7 +121,7 @@ parts:
       perl init-repository
     override-build: |
       cd $CRAFT_PART_BUILD
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license #-prefix $CRAFT_PART_INSTALL/opt/$CRAFT_PART_NAME
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL
       gmake
       gmake install
     organize:
