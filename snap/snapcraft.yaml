@@ -125,8 +125,8 @@ parts:
       gmake
       gmake install
     organize:
+      lib: usr/lib/$CRAFT_ARCH_TRIPLET
       bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/bin
-      lib: usr/lib/$CRAFT_ARCH_TRIPLET/lib
       include: usr/include/$CRAFT_ARCH_TRIPLET/qt5
       plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins
       qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/qml
