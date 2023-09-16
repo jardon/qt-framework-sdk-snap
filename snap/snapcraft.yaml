@@ -84,6 +84,41 @@ parts:
       - libxcomposite-dev
       - libxcursor-dev
       - libxtst-dev
+      - llvm-11-dev
+      - libdouble-conversion-dev
+      - libglib2.0-dev
+      - libsystemd-dev
+      - libb2-dev
+      - libpcre2-dev
+      - libproxy-dev
+      - libatspi2.0-dev
+      - libdirectfb-dev
+      - libharfbuzz-dev
+      - libmtdev-dev
+      - libwebp-dev
+      - libwebpdemux2
+      - libwebpmux3
+      - libmng-dev
+      - bluez
+      - openssl
+      - libudev-dev
+      - libgconf2-dev
+      - libhunspell-dev
+      - libsnappy-dev
+      - libxrandr-dev
+      - libxshmfence-dev
+      - libjpeg-dev
+      - libevent-dev
+      - libminizip-dev
+      - libre2-dev
+      - liblcms2-dev
+      - libxslt1-dev
+      - libavcodec-dev
+      - libavformat-dev
+      - libavutil-dev
+      - libopus-dev
+      - libvpx-dev
+      - libpci-dev
     stage-packages:
       - libfontconfig1
       - libfreetype6
@@ -178,3 +213,4 @@ parts:
       mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
       modules: usr/share/qt6/modules
       doc: usr/share/qt6/doc
+
