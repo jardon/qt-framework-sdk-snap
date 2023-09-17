@@ -84,7 +84,7 @@ parts:
       - libxcomposite-dev
       - libxcursor-dev
       - libxtst-dev
-      - llvm-11-dev
+      - llvm-dev
       - libdouble-conversion-dev
       - libglib2.0-dev
       - libsystemd-dev
@@ -142,6 +142,7 @@ parts:
       - libxcb-xinerama0
       - libxkbcommon0
       - libxkbcommon-x11-0
+      - libxkbfile-dev
   qt6:
     after: [build-deps, mesa]
     plugin: cmake
@@ -200,17 +201,23 @@ parts:
     cmake-generator: Ninja
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
+    override-build: |
+      ln -sf ./python2 /usr/bin/python
+      craftctl default
+      mkdir -p $CRAFT_PART_INSTALL/etc/qt6
+      cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/qt6
     organize:
-      lib: usr/lib/$CRAFT_ARCH_TRIPLET
-      libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
-      bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/bin
-      include: usr/include/$CRAFT_ARCH_TRIPLET/qt6
-      plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
-      qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/qml
-      translations: usr/share/qt6/translations
-      phrasebooks: usr/share/qt6/phrasebooks
-      metatypes: usr/lib/$CRAFT_ARCH_TRIPLET/metatypes
-      mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
-      modules: usr/share/qt6/modules
-      doc: usr/share/qt6/doc
+      usr/lib: usr/lib/$CRAFT_ARCH_TRIPLET
+      usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
+      usr/bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/bin
+      usr/include: usr/include/$CRAFT_ARCH_TRIPLET/qt6
+      usr/plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
+      usr/qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/qml
+      usr/translations: usr/share/qt6/translations
+      usr/phrasebooks: usr/share/qt6/phrasebooks
+      usr/metatypes: usr/lib/$CRAFT_ARCH_TRIPLET/metatypes
+      usr/mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
+      usr/modules: usr/share/qt6/modules
+      usr/doc: usr/share/qt6/doc
 
