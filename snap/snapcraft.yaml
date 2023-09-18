@@ -11,34 +11,15 @@ grade: stable
 confinement: strict
 
 parts:
-  mesa:
-    after: []
-    plugin: nil
-    build-attributes:
-    - no-patchelf
-    build-packages: []
-    stage-packages:
-    - libgl1-mesa-dri
-    - libglx-mesa0
-    prime:
-    - -lib/udev
-    - -usr/doc
-    - -usr/doc-base
-    - -usr/share/applications
-    - -usr/share/apport
-    - -usr/share/bug
-    - -usr/share/doc
-    - -usr/share/doc-base
-    - -usr/share/icons
-    - -usr/share/libdrm
-    - -usr/share/libwacom
-    - -usr/share/lintian
-    - -usr/share/man
-    - -usr/share/pkgconfig
-  build-deps:
-    plugin: nil
+  qt6:
+    plugin: cmake
+    source: https://code.qt.io/qt/qt5.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION
+    cmake-generator: Ninja
+    cmake-parameters:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_PREFIX=/usr
     build-packages:
-      # ALL
       - python3-minimal
       - libclang-dev
       - libgl1-mesa-dev
@@ -85,38 +66,6 @@ parts:
       - libxcursor-dev
       - libxtst-dev
       - llvm-dev
-    stage-packages:
-      - libfontconfig1
-      - libfreetype6
-      - libx11-6
-      - libx11-xcb1
-      - libxext6
-      - libxfixes3
-      - libxi6
-      - libxrender1
-      - libxcb1
-      - libxcb-glx0
-      - libxcb-keysyms1
-      - libxcb-image0
-      - libxcb-shm0
-      - libxcb-icccm4
-      - libxcb-sync1
-      - libxcb-xfixes0
-      - libxcb-shape0
-      - libxcb-randr0
-      - libxcb-render-util0
-      - libxcb-xinerama0
-      - libxkbcommon0
-      - libxkbcommon-x11-0
-  qt6:
-    after: [build-deps, mesa]
-    plugin: cmake
-    source: https://code.qt.io/qt/qt5.git
-    source-tag: v$SNAPCRAFT_PROJECT_VERSION
-    cmake-generator: Ninja
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
     organize:
       usr/lib: usr/lib/$CRAFT_ARCH_TRIPLET
       usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
