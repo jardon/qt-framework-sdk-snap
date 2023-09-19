@@ -11,34 +11,15 @@ grade: stable
 confinement: strict
 
 parts:
-  mesa:
-    after: []
+  qt5:
     plugin: nil
-    build-attributes:
-    - no-patchelf
-    build-packages: []
-    stage-packages:
-    - libgl1-mesa-dri
-    - libglx-mesa0
-    prime:
-    - -lib/udev
-    - -usr/doc
-    - -usr/doc-base
-    - -usr/share/applications
-    - -usr/share/apport
-    - -usr/share/bug
-    - -usr/share/doc
-    - -usr/share/doc-base
-    - -usr/share/icons
-    - -usr/share/libdrm
-    - -usr/share/libwacom
-    - -usr/share/lintian
-    - -usr/share/man
-    - -usr/share/pkgconfig
-  build-deps:
-    plugin: nil
+    source: https://code.qt.io/qt/qt5.git
+    source-tag: v$SNAPCRAFT_PROJECT_VERSION-lts-lgpl
+    source-submodules: []
+    override-pull: |
+      craftctl default
+      perl init-repository
     build-packages:
-      # ALL
       - python3-minimal
       - libclang-dev
       - libgl1-mesa-dev
@@ -71,59 +52,32 @@ parts:
       - libwayland-server0
       - libgles2-mesa-dev
       - libxkbcommon-dev
-        #- gperf
-        #- clang
-        #- bison
-        #- flex
-        #- nodejs
-        #- python2-minimal
-        #- python-pip
-        #- libnss3-dev
-        #- libdbus-1-dev
-        #- libdrm-dev
-        #- libxcomposite-dev
-        #- libxcursor-dev
-        #- libxtst-dev
-      # 5.15
+      - gperf
+      - clang
+      - bison
+      - flex
+      - nodejs
+      - python2-minimal
+      - python-pip
+      - libnss3-dev
+      - libdbus-1-dev
+      - libdrm-dev
+      - libxcomposite-dev
+      - libxcursor-dev
+      - libxtst-dev
       - perl
       - qt5-qmake
-    stage-packages:
-      - libfontconfig1
-      - libfreetype6
-      - libx11-6
-      - libx11-xcb1
-      - libxext6
-      - libxfixes3
-      - libxi6
-      - libxrender1
-      - libxcb1
-      - libxcb-glx0
-      - libxcb-keysyms1
-      - libxcb-image0
-      - libxcb-shm0
-      - libxcb-icccm4
-      - libxcb-sync1
-      - libxcb-xfixes0
-      - libxcb-shape0
-      - libxcb-randr0
-      - libxcb-render-util0
-      - libxcb-xinerama0
-      - libxkbcommon0
-      - libxkbcommon-x11-0
-  qt5:
-    after: [build-deps, mesa]
-    plugin: nil
-    source: https://code.qt.io/qt/qt5.git
-    source-tag: v$SNAPCRAFT_PROJECT_VERSION-lts-lgpl
-    source-submodules: []
-    override-pull: |
-      craftctl default
-      perl init-repository
+      - wget
     override-build: |
       cd $CRAFT_PART_BUILD
       $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL
+      cd $CRAFT_PART_BUILD/qtwebengine/src/3rdparty
+      wget https://raw.githubusercontent.com/meta-qt5/meta-qt5/2a38fca150f065f869ed530fffe1a07beec80692/recipes-qt/qt5/qtwebengine/chromium/0013-chromium-breakpad-fix-build-with-glibc-2.34.patch
+      git apply ./0013-chromium-breakpad-fix-build-with-glibc-2.34.patch
+      cd $CRAFT_PART_BUILD
       gmake
       gmake install
+      cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME/
     organize:
       lib: usr/lib/$CRAFT_ARCH_TRIPLET
       bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/bin
