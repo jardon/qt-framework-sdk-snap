@@ -19,6 +19,7 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DQT_FEATURE_alsa=ON
     build-packages:
       - python3-minimal
       - libclang-dev
@@ -66,11 +67,16 @@ parts:
       - libxcursor-dev
       - libxtst-dev
       - llvm-dev
+      - libhunspell-dev
+      - python3-html5lib
+      - libasound2-dev
+      - libcups2-dev
+      - libglib2.0-dev
     organize:
-      usr/lib: usr/lib/$CRAFT_ARCH_TRIPLET
+      usr/lib/*: usr/lib/$CRAFT_ARCH_TRIPLET/
       usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
       usr/bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/bin
-      usr/include: usr/include/$CRAFT_ARCH_TRIPLET/qt6
+      usr/include/*: usr/include/$CRAFT_ARCH_TRIPLET/qt6/
       usr/plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
       usr/qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/qml
       usr/translations: usr/share/qt6/translations
