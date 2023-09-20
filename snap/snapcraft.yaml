@@ -11,140 +11,7 @@ grade: stable
 confinement: strict
 
 parts:
-  mesa:
-    after: []
-    plugin: nil
-    build-attributes:
-    - no-patchelf
-    build-packages: []
-    stage-packages:
-    - libgl1-mesa-dri
-    - libglx-mesa0
-    prime:
-    - -lib/udev
-    - -usr/doc
-    - -usr/doc-base
-    - -usr/share/applications
-    - -usr/share/apport
-    - -usr/share/bug
-    - -usr/share/doc
-    - -usr/share/doc-base
-    - -usr/share/icons
-    - -usr/share/libdrm
-    - -usr/share/libwacom
-    - -usr/share/lintian
-    - -usr/share/man
-    - -usr/share/pkgconfig
-  build-deps:
-    plugin: nil
-    build-packages:
-      # ALL
-      - python3-minimal
-      - libclang-dev
-      - libgl1-mesa-dev
-      - libglu1-mesa-dev
-      - ninja-build
-      - libfontconfig1-dev
-      - libfreetype6-dev
-      - libx11-dev
-      - libx11-xcb-dev
-      - libxext-dev
-      - libxfixes-dev
-      - libxi-dev
-      - libxrender-dev
-      - libxcb1-dev
-      - libxcb-glx0-dev
-      - libxcb-keysyms1-dev
-      - libxcb-image0-dev
-      - libxcb-shm0-dev
-      - libxcb-icccm4-dev
-      - libxcb-sync0-dev
-      - libxcb-xfixes0-dev
-      - libxcb-shape0-dev
-      - libxcb-randr0-dev
-      - libxcb-render-util0-dev
-      - libxcb-xinerama0-dev
-      - libxkbcommon-dev
-      - libxkbcommon-x11-dev
-      - libwayland-dev
-      - libwayland-egl1-mesa
-      - libwayland-server0
-      - libgles2-mesa-dev
-      - libxkbcommon-dev
-      - gperf
-      - clang
-      - bison
-      - flex
-      - nodejs
-      - python2-minimal
-      - python-pip
-      - libnss3-dev
-      - libdbus-1-dev
-      - libdrm-dev
-      - libxcomposite-dev
-      - libxcursor-dev
-      - libxtst-dev
-      - llvm-dev
-      - libdouble-conversion-dev
-      - libglib2.0-dev
-      - libsystemd-dev
-      - libb2-dev
-      - libpcre2-dev
-      - libproxy-dev
-      - libatspi2.0-dev
-      - libdirectfb-dev
-      - libharfbuzz-dev
-      - libmtdev-dev
-      - libwebp-dev
-      - libwebpdemux2
-      - libwebpmux3
-      - libmng-dev
-      - bluez
-      - openssl
-      - libudev-dev
-      - libgconf2-dev
-      - libhunspell-dev
-      - libsnappy-dev
-      - libxrandr-dev
-      - libxshmfence-dev
-      - libjpeg-dev
-      - libevent-dev
-      - libminizip-dev
-      - libre2-dev
-      - liblcms2-dev
-      - libxslt1-dev
-      - libavcodec-dev
-      - libavformat-dev
-      - libavutil-dev
-      - libopus-dev
-      - libvpx-dev
-      - libpci-dev
-    stage-packages:
-      - libfontconfig1
-      - libfreetype6
-      - libx11-6
-      - libx11-xcb1
-      - libxext6
-      - libxfixes3
-      - libxi6
-      - libxrender1
-      - libxcb1
-      - libxcb-glx0
-      - libxcb-keysyms1
-      - libxcb-image0
-      - libxcb-shm0
-      - libxcb-icccm4
-      - libxcb-sync1
-      - libxcb-xfixes0
-      - libxcb-shape0
-      - libxcb-randr0
-      - libxcb-render-util0
-      - libxcb-xinerama0
-      - libxkbcommon0
-      - libxkbcommon-x11-0
-      - libxkbfile-dev
   qt6:
-    after: [build-deps, mesa]
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
@@ -202,16 +69,69 @@ parts:
     cmake-parameters:
       - -DCMAKE_BUILD_TYPE=Release
       - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DQT_FEATURE_alsa=ON
+    build-packages:
+      - python3-minimal
+      - libclang-dev
+      - libgl1-mesa-dev
+      - libglu1-mesa-dev
+      - ninja-build
+      - libfontconfig1-dev
+      - libfreetype6-dev
+      - libx11-dev
+      - libx11-xcb-dev
+      - libxext-dev
+      - libxfixes-dev
+      - libxi-dev
+      - libxrender-dev
+      - libxcb1-dev
+      - libxcb-glx0-dev
+      - libxcb-keysyms1-dev
+      - libxcb-image0-dev
+      - libxcb-shm0-dev
+      - libxcb-icccm4-dev
+      - libxcb-sync0-dev
+      - libxcb-xfixes0-dev
+      - libxcb-shape0-dev
+      - libxcb-randr0-dev
+      - libxcb-render-util0-dev
+      - libxcb-xinerama0-dev
+      - libxkbcommon-dev
+      - libxkbcommon-x11-dev
+      - libwayland-dev
+      - libwayland-egl1-mesa
+      - libwayland-server0
+      - libgles2-mesa-dev
+      - libxkbcommon-dev
+      - gperf
+      - clang
+      - bison
+      - flex
+      - nodejs
+      - python2-minimal
+      - python-pip
+      - libnss3-dev
+      - libdbus-1-dev
+      - libdrm-dev
+      - libxcomposite-dev
+      - libxcursor-dev
+      - libxtst-dev
+      - llvm-dev
+      - libhunspell-dev
+      - python3-html5lib
+      - libasound2-dev
+      - libcups2-dev
+      - libglib2.0-dev
     override-build: |
       ln -sf ./python2 /usr/bin/python
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/etc/qt6
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/qt6
     organize:
-      usr/lib: usr/lib/$CRAFT_ARCH_TRIPLET
+      usr/lib/*: usr/lib/$CRAFT_ARCH_TRIPLET/
       usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
       usr/bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/bin
-      usr/include: usr/include/$CRAFT_ARCH_TRIPLET/qt6
+      usr/include/*: usr/include/$CRAFT_ARCH_TRIPLET/qt6/
       usr/plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
       usr/qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/qml
       usr/translations: usr/share/qt6/translations
@@ -220,4 +140,3 @@ parts:
       usr/mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
       usr/modules: usr/share/qt6/modules
       usr/doc: usr/share/qt6/doc
-
