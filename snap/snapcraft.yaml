@@ -72,6 +72,7 @@ parts:
       - libasound2-dev
       - libcups2-dev
       - libglib2.0-dev
+      - libgstreamer1.0-dev
     organize:
       usr/lib/*: usr/lib/$CRAFT_ARCH_TRIPLET/
       usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
