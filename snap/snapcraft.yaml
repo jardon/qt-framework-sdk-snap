@@ -68,18 +68,25 @@ parts:
       - perl
       - qt5-qmake
       - wget
+      - libxdamage-dev
+      - libxrandr-dev
+      - libxcb-dri3-dev
     override-build: |
-      cd $CRAFT_PART_BUILD
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL
-      cd $CRAFT_PART_BUILD/qtwebengine/src/3rdparty
+      cd $CRAFT_PART_SRC/qtwebengine/src/3rdparty
+      git reset --hard
       wget https://raw.githubusercontent.com/meta-qt5/meta-qt5/2a38fca150f065f869ed530fffe1a07beec80692/recipes-qt/qt5/qtwebengine/chromium/0013-chromium-breakpad-fix-build-with-glibc-2.34.patch
       git apply ./0013-chromium-breakpad-fix-build-with-glibc-2.34.patch
+      sed -i '1s/^/#include <limits>\n/' chromium/third_party/perfetto/src/trace_processor/containers/string_pool.h
+      cd $CRAFT_PART_BUILD
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL
       cd $CRAFT_PART_BUILD
       gmake
       gmake install
+      mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME/
     organize:
       lib: usr/lib/$CRAFT_ARCH_TRIPLET
+      libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/libexec
       bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/bin
       include: usr/include/$CRAFT_ARCH_TRIPLET/qt5
       plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins
@@ -88,3 +95,4 @@ parts:
       phrasebooks: usr/share/qt5/phrasebooks
       mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/mkspecs
       doc: usr/share/qt5/doc
+      resources: usr/share/qt5/resources
