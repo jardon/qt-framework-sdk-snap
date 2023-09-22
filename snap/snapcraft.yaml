@@ -71,6 +71,9 @@ parts:
       - libxdamage-dev
       - libxrandr-dev
       - libxcb-dri3-dev
+      - libasound2-dev
+      - libgstreamer1.0-dev
+      - libgstreamer-plugins-base1.0-dev
     override-build: |
       cd $CRAFT_PART_SRC/qtwebengine/src/3rdparty
       git reset --hard
@@ -78,21 +81,9 @@ parts:
       git apply ./0013-chromium-breakpad-fix-build-with-glibc-2.34.patch
       sed -i '1s/^/#include <limits>\n/' chromium/third_party/perfetto/src/trace_processor/containers/string_pool.h
       cd $CRAFT_PART_BUILD
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/usr -archdatadir $CRAFT_PART_INSTALL/usr/lib/$CRAFT_ARCH_TRIPLET/qt5 -datadir usr/share/qt5
       cd $CRAFT_PART_BUILD
       gmake
       gmake install
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME/
-    organize:
-      lib: usr/lib/$CRAFT_ARCH_TRIPLET
-      libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/libexec
-      bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/bin
-      include: usr/include/$CRAFT_ARCH_TRIPLET/qt5
-      plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/plugins
-      qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/qml
-      translations: usr/share/qt5/translations
-      phrasebooks: usr/share/qt5/phrasebooks
-      mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt5/mkspecs
-      doc: usr/share/qt5/doc
-      resources: usr/share/qt5/resources
