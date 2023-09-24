@@ -87,3 +87,6 @@ parts:
       gmake install
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME/
+    override-stage: |
+      craftctl default
+      find $CRAFT_STAGE -type f,l -name "*.pc" -exec bash -c "sed -i 's:/root/stage:/snap/qt-framework-sdk/current:g' {}*" \;
