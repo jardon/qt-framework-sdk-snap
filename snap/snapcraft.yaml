@@ -12,14 +12,9 @@ confinement: strict
 
 parts:
   qt6:
-    plugin: cmake
+    plugin: nil
     source: https://code.qt.io/qt/qt5.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
-    cmake-generator: Ninja
-    cmake-parameters:
-      - -DCMAKE_BUILD_TYPE=Release
-      - -DCMAKE_INSTALL_PREFIX=/usr
-      - -DQT_FEATURE_alsa=ON
     build-packages:
       - python3-minimal
       - libclang-dev
@@ -73,16 +68,14 @@ parts:
       - libcups2-dev
       - libglib2.0-dev
       - libgstreamer1.0-dev
-    organize:
-      usr/lib/*: usr/lib/$CRAFT_ARCH_TRIPLET/
-      usr/libexec: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/libexec
-      usr/bin: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/bin
-      usr/include/*: usr/include/$CRAFT_ARCH_TRIPLET/qt6/
-      usr/plugins: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
-      usr/qml: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/qml
-      usr/translations: usr/share/qt6/translations
-      usr/phrasebooks: usr/share/qt6/phrasebooks
-      usr/metatypes: usr/lib/$CRAFT_ARCH_TRIPLET/metatypes
-      usr/mkspecs: usr/lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
-      usr/modules: usr/share/qt6/modules
-      usr/doc: usr/share/qt6/doc
+      - cmake-data
+    override-build: |
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/usr -archdatadir $CRAFT_PART_INSTALL/usr/lib/x86_68-linux-gnu/$CRAFT_PART_NAME -datadir $CRAFT_PART_INSTALL/usr/share/$CRAFT_PART_NAME
+      cmake --build $CRAFT_PART_BUILD --parallel 4
+      cmake --install $CRAFT_PART_BUILD
+      mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
+      cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
+    override-stage: |
+      craftctl default
+      find $CRAFT_STAGE -type f,l -name "*.pc" -exec bash -c "sed -i 's:/root/stage:/snap/qt-framework-sdk/current:g' {}*" \;
+
