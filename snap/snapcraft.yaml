@@ -1,6 +1,6 @@
 name: qt-framework-sdk
 base: core22
-version: 6.5.2
+version: 6.6.0-rc1
 summary: Qt Framework SDK
 description: |
   Qt is a cross-platform application development framework widely used
@@ -12,7 +12,7 @@ confinement: strict
 
 parts:
   qt6:
-    plugin: nil
+    plugin: cmake
     source: https://code.qt.io/qt/qt5.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
     build-packages:
