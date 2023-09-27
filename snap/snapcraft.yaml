@@ -70,7 +70,7 @@ parts:
       - libgstreamer1.0-dev
       - cmake-data
     override-build: |
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/usr -archdatadir $CRAFT_PART_INSTALL/usr/lib/x86_68-linux-gnu/$CRAFT_PART_NAME -datadir $CRAFT_PART_INSTALL/usr/share/$CRAFT_PART_NAME
+      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/usr -archdatadir $CRAFT_PART_INSTALL/usr/lib/x86_68-linux-gnu/$CRAFT_PART_NAME -datadir $CRAFT_PART_INSTALL/usr/share/$CRAFT_PART_NAME -- -DQT_FEATURE_alsa=ON
       cmake --build $CRAFT_PART_BUILD --parallel 4
       cmake --install $CRAFT_PART_BUILD
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
