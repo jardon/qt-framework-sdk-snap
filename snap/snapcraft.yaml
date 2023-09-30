@@ -10,71 +10,201 @@ description: |
 grade: stable
 confinement: strict
 
+package-repositories:
+  - type: apt
+    url: https://deb.nodesource.com/node_20.x
+    components: [main]
+    suites: [nodistro]
+    key-id: 6F71F525282841EEDAF851B42F59B5F99B1BE0B4
+
 parts:
   qt6:
     plugin: cmake
     source: https://code.qt.io/qt/qt5.git
     source-tag: v$SNAPCRAFT_PROJECT_VERSION
+    cmake-generator: Ninja
+    cmake-parameters:
+      - -DCMAKE_LIBRARY_PATH=$CRAFT_ARCH_TRIPLET
+      - -DCMAKE_INSTALL_PREFIX=/usr
+      - -DINSTALL_BINDIR=lib/qt6/bin
+      - -DINSTALL_LIBDIR=lib/$CRAFT_ARCH_TRIPLET
+      - -DINSTALL_LIBEXECDIR=lib/qt6/libexec
+      - -DINSTALL_ARCHDATADIR=lib/$CRAFT_ARCH_TRIPLET/qt6
+      - -DINSTALL_EXAMPLESDIR=lib/$CRAFT_ARCH_TRIPLET/qt6/examples
+      - -DINSTALL_DATADIR=share/qt6
+      - -DINSTALL_HOSTDATADIR=lib/$CRAFT_ARCH_TRIPLET/qt6
+      - -DINSTALL_DOCDIR=share/qt6/doc
+      - -DINSTALL_SYSCONFDIR=/etc/xdg
+      - -DINSTALL_INCLUDEDIR=include/$CRAFT_ARCH_TRIPLET/qt6
+      - -DINSTALL_PLUGINDIR=lib/$CRAFT_ARCH_TRIPLET/qt6/plugins
+      - -DINSTALL_TRANSLATIONDIR=share/qt6/translations
+      - -DINSTALL_MKSPECSDIR=lib/$CRAFT_ARCH_TRIPLET/qt6/mkspecs
+      - -DINSTALL_PUBLICBINDIR=bin
+      - -DBUILD_EXAMPLES=ON
+      - -DFEATURE_mimetype_database=OFF
+      - -DFEATURE_dbus_linked=ON
+      - -DFEATURE_accessibility=ON
+      - -DFEATURE_doubleconversion=ON
+      - -DFEATURE_glib=ON
+      - -DFEATURE_icu=ON
+      - -DFEATURE_pcre2=ON
+      - -DFEATURE_system_pcre2=ON
+      - -DFEATURE_zlib=ON
+      - -DFEATURE_ssl=ON
+      - -DFEATURE_libproxy=ON
+      - -DFEATURE_system_proxies=ON
+      - -DFEATURE_cups=ON
+      - -DFEATURE_fontconfig=ON
+      - -DFEATURE_freetype=ON
+      - -DFEATURE_harfbuzz=ON
+      - -DFEATURE_gtk=ON
+      - -DFEATURE_directfb=OFF
+      - -DFEATURE_sql_odbc=ON
+      - -DFEATURE_sql_mysql=ON
+      - -DFEATURE_sql_psql=ON
+      - -DFEATURE_sql_sqlite=ON
+      - -DFEATURE_system_sqlite=ON
+      - -DFEATURE_jpeg=ON
+      - -DFEATURE_system_jpeg=ON
+      - -DFEATURE_png=ON
+      - -DFEATURE_system_png=ON
+      - -DFEATURE_system_libb2=ON
+      - -DFEATURE_rpath=OFF
+      - -DFEATURE_relocatable=OFF
+      - -DFEATURE_qtpdf_build=ON
+      - -DFEATURE_qtpdf_enable_v8=ON
+      - -DFEATURE_qtpdf_quick_build=ON
+      - -DFEATURE_qtpdf_widgets_build=ON
+      - -DFEATURE_qtwebengine-quick-build=ON
+      - -DFEATURE_qtwebengine-widgets-build=ON
+      - -DFEATURE_webengine_kerberos=ON
+      - -DFEATURE_webengine_proprietary_codecs=ON
+      - -DFEATURE_webengine_system_icu=OFF
+      # - -DFEATURE_webengine_system_libevent=ON
+      - -DFEATURE_webengine-system-libjpeg=on
+      - -DFEATURE_webengine-system-libpng=on
+      - -DFEATURE_webengine_system_zlib=ON
+      - -DFEATURE_webengine_webrtc=ON
+      - -DFEATURE_webengine_webrtc-pipewire=ON
+      - -DQT_FEATURE_alsa=ON
     build-packages:
-      - python3-minimal
-      - libclang-dev
-      - libgl1-mesa-dev
-      - libglu1-mesa-dev
-      - ninja-build
-      - libfontconfig1-dev
-      - libfreetype6-dev
-      - libx11-dev
-      - libx11-xcb-dev
-      - libxext-dev
-      - libxfixes-dev
-      - libxi-dev
-      - libxrender-dev
-      - libxcb1-dev
+      - libpq-dev
       - libxcb-glx0-dev
-      - libxcb-keysyms1-dev
-      - libxcb-image0-dev
-      - libxcb-shm0-dev
-      - libxcb-icccm4-dev
-      - libxcb-sync0-dev
-      - libxcb-xfixes0-dev
-      - libxcb-shape0-dev
-      - libxcb-randr0-dev
-      - libxcb-render-util0-dev
-      - libxcb-util-dev
-      - libxcb-xinerama0-dev
-      - libxcb-xkb-dev
-      - libxkbcommon-dev
-      - libxkbcommon-x11-dev
-      - libwayland-dev
-      - libwayland-egl1-mesa
-      - libwayland-server0
-      - libgles2-mesa-dev
-      - libxkbcommon-dev
-      - gperf
-      - clang
-      - bison
-      - flex
-      - nodejs
-      - python2-minimal
-      - python-pip
-      - libnss3-dev
-      - libdbus-1-dev
+      - libjpeg-dev
       - libdrm-dev
-      - libxcomposite-dev
+      - libxcb-render-util0-dev
       - libxcursor-dev
-      - libxtst-dev
-      - llvm-dev
-      - libhunspell-dev
-      - python3-html5lib
-      - libasound2-dev
-      - libcups2-dev
+      - zlib1g-dev
+      - liblttng-ust-dev
+      - libxkbcommon-x11-dev
+      - libxcomposite-dev
+      - libatspi2.0-dev
+      - libxcb-xtest0-dev
+      - firebird-dev
+      - libwayland-server0
+      - libxrender-dev
+      - libxcb-record0-dev
+      - libgl1-mesa-dev
+      - python3-minimal
       - libglib2.0-dev
-      - libgstreamer1.0-dev
+      - python2-minimal
+      - libxcb-xvmc0-dev
+      - libxcb-xv0-dev
+      - libx11-dev
+      - libfontconfig-dev
+      - libxkbcommon-dev
+      - libxcb-dri2-0-dev
+      - libicu-dev
+      - gperf
+      - libgl-dev
+      - libdouble-conversion-dev
+      - libglu-dev
+      - libgles2-mesa-dev
+      - python-pip
+      - llvm-dev
+      - libzstd-dev
+      - unixodbc-dev
+      - libsystemd-dev
+      - libxcb-xrm-dev
+      - pkg-config
+      - libmtdev-dev
+      - flex
+      - libkrb5-dev
+      - libopengl-dev
+      - libglu1-mesa-dev
+      - libb2-dev
+      - libxcb-util-dev
       - cmake-data
+      - libpng-dev
+      - clang
+      - libfreetype-dev
+      - libts-dev
+      - libxcb-composite0-dev
+      - libxcb-ewmh-dev
+      - libasound2-dev
+      - libxcb-shape0-dev
+      - libxcb-res0-dev
+      - libxcb1-dev
+      - libxcb-cursor-dev
+      - libxcb-dpms0-dev
+      - libsctp-dev
+      - libxcb-dri3-dev
+      - libnss3-dev
+      - libxcb-xinerama0-dev
+      - python3-html5lib
+      - libdbus-1-dev
+      - libxcb-xf86dri0-dev
+      - bison
+      - libxcb-present-dev
+      - libxcb-randr0-dev
+      - libgbm-dev
+      - libxcb-shm0-dev
+      - libxcb-sync-dev
+      - libinput-dev
+      - nodejs
+      - libgtk-3-dev
+      - libxcb-sync0-dev
+      - libcups2-dev
+      - libxshmfence-dev
+      - libgstreamer1.0-dev
+      - libclang-dev
+      - dh-exec
+      - libproxy-dev
+      - libsqlite3-dev
+      - libglx-dev
+      - libxcb-xkb-dev
+      - libxcb-screensaver0-dev
+      - libpcre2-dev
+      - libharfbuzz-dev
+      - libxcb-damage0-dev
+      - default-libmysqlclient-dev
+      - libxfixes-dev
+      - libx11-xcb-dev
+      - libvulkan-dev
+      - libmd4c-dev
+      - libxcb-render0-dev
+      - libxcb-keysyms1-dev
+      - libxcb-xfixes0-dev
+      - ninja-build
+      - libwayland-dev
+      - libgles-dev
+      - libxcb-xinput-dev
+      - libxext-dev
+      - libfreetype6-dev
+      - libudev-dev
+      - libmd4c-html0-dev
+      - libxcb-icccm4-dev
+      - libwayland-egl1-mesa
+      - libhunspell-dev
+      - libfontconfig1-dev
+      - libxcb-image0-dev
+      - libxi-dev
+      - libssl-dev
+      - libxtst-dev
+      - nodejs
+      - libxkbfile-dev
     override-build: |
-      $CRAFT_PART_SRC/configure -opensource -nomake examples -nomake tests -confirm-license -prefix $CRAFT_PART_INSTALL/usr -archdatadir $CRAFT_PART_INSTALL/usr/lib/x86_68-linux-gnu/$CRAFT_PART_NAME -datadir $CRAFT_PART_INSTALL/usr/share/$CRAFT_PART_NAME -- -DQT_FEATURE_alsa=ON
-      cmake --build $CRAFT_PART_BUILD --parallel 4
-      cmake --install $CRAFT_PART_BUILD
+      craftctl default
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
     override-stage: |
