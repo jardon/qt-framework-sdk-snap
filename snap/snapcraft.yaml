@@ -1,6 +1,6 @@
 name: qt-framework-sdk
 base: core22
-version: 6.6.0-rc1
+version: 6.6.1
 summary: Qt Framework SDK
 description: |
   Qt is a cross-platform application development framework widely used
@@ -207,103 +207,6 @@ parts:
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
       cp $CRAFT_PART_BUILD/config.summary $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
-    stage-packages:
-      - libpq5
-      - libxcb-glx0
-      - libjpeg8
-      - libdrm-common
-      - libxcb-render-util0
-      - libxcursor1
-      - zlib1g
-      - liblttng-ust1
-      - libxkbcommon-x11-0
-      - libxcomposite1
-      - libatspi2.0-0
-      - libxcb-xtest0
-      - firebird3.0-common
-      - libxrender1
-      - libxcb-record0
-      - libgl1-mesa-glx
-      - libglib2.0-0
-      - libxcb-xvmc0
-      - libxcb-xv0
-      - libx11-6
-      - libfontconfig
-      - libxkbcommon0
-      - libxcb-dri2-0
-      - libicu70
-      - libgl1
-      - libdouble-conversion3
-      - libgles2-mesa
-      - llvm
-      - libzstd1
-      - unixodbc
-      - libsystemd0
-      - libxcb-xrm0
-      - libmtdev1
-      - libkrb5-3
-      - libopengl0
-      - libglu1-mesa
-      - libb2-1
-      - libxcb-util1
-      - libpng16-16
-      - libts0
-      - libxcb-composite0
-      - libxcb-ewmh2
-      - libasound2
-      - libxcb-shape0
-      - libxcb-res0
-      - libxcb1
-      - libxcb-cursor0
-      - libxcb-dpms0
-      - libsctp1
-      - libxcb-dri3-0
-      - libnss3
-      - libxcb-xinerama0
-      - libdbus-1-3
-      - libxcb-xf86dri0
-      - libxcb-present0
-      - libxcb-randr0
-      - libgbm1
-      - libxcb-shm0
-      - libinput10
-      - libgtk-3-0
-      - libxcb-sync1
-      - libcups2
-      - libxshmfence1
-      - libgstreamer1.0-0
-      - libclang1
-      - libproxy1v5
-      - libsqlite3-0
-      - libglx0
-      - libxcb-xkb1
-      - libxcb-screensaver0
-      - libpcre2-32-0
-      - libharfbuzz0b
-      - libxcb-damage0
-      - libmysqlclient21
-      - libxfixes3
-      - libx11-xcb1
-      - libvulkan1
-      - libmd4c0
-      - libxcb-render0
-      - libxcb-keysyms1
-      - libxcb-xfixes0
-      - libwayland-server0
-      - libgles1
-      - libxcb-xinput0
-      - libxext6
-      - libfreetype6
-      - libudev1
-      - libmd4c-html0
-      - libxcb-icccm4
-      - libhunspell-1.7-0
-      - libfontconfig1
-      - libxcb-image0
-      - libxi6
-      - libssl3
-      - libxtst6
-      - libxkbfile1
     override-stage: |
       craftctl default
       find $CRAFT_STAGE -type f,l -name "*.pc" -exec bash -c "sed -i 's:/root/stage:/snap/qt-framework-sdk/current:g' {}*" \;
