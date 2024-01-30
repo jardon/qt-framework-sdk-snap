@@ -203,6 +203,7 @@ parts:
       - libxtst-dev
       - nodejs
       - libxkbfile-dev
+      - libpcre2-16-0
     override-build: |
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
