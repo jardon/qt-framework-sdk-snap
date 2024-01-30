@@ -74,6 +74,8 @@ parts:
       - libasound2-dev
       - libgstreamer1.0-dev
       - libgstreamer-plugins-base1.0-dev
+      - libpcre2-16-0
+      - libglib2.0-0
     override-build: |
       cd $CRAFT_PART_SRC/qtwebengine/src/3rdparty
       git reset --hard
