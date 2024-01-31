@@ -203,6 +203,7 @@ parts:
       - libxtst-dev
       - nodejs
       - libxkbfile-dev
+    stage-packages:
       - libpcre2-16-0
       - libdouble-conversion3
       - libb2-1
