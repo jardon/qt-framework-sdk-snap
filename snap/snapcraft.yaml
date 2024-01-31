@@ -203,6 +203,7 @@ parts:
       - libxtst-dev
       - nodejs
       - libxkbfile-dev
+    stage-packages:
       - libpcre2-16-0
     override-build: |
       craftctl default
