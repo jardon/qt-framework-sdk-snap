@@ -205,6 +205,9 @@ parts:
       - libxkbfile-dev
     stage-packages:
       - libpcre2-16-0
+      - libglib2.0-0
+      - libdouble-conversion3
+      - libb2-1
     override-build: |
       craftctl default
       mkdir -p $CRAFT_PART_INSTALL/etc/$CRAFT_PART_NAME
