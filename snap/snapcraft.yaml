@@ -1,6 +1,6 @@
 name: qt-framework-sdk
-base: core22
-version: 6.6.1
+base: core20
+version: 6.8.0
 summary: Qt Framework SDK
 description: |
   Qt is a cross-platform application development framework widely used
