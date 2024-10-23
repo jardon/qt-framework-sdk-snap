@@ -1,4 +1,4 @@
-name: qt-framework-sdk
+name: qt6-framework
 base: core20
 version: 6.8.0
 summary: Qt Framework SDK
